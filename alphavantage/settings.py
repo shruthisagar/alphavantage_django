@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'alpha'
 ]
 
@@ -83,6 +84,12 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '',
     }
+}
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': 'localhost:6379',
+    },
 }
 
 # Password validation
