@@ -12,7 +12,8 @@ def get_latest_data():
         data = AlphavantageBTCtoUSD.objects.only(
             "exchange_rate", "last_refresh_time"
         ).last()
-        data = model_to_dict(data)
+        if data:
+            data = model_to_dict(data)
         cache.set("alphavantageBTCtoUSD", data)
         if not data:
             store_latest_data()
@@ -39,4 +40,5 @@ def store_latest_data():
             last_refresh_time=data["6. Last Refreshed"],
         ),
     )
-    return {"status": 1}
+    return dict( exchange_rate=data["5. Exchange Rate"],
+            last_refresh_time=data["6. Last Refreshed"])

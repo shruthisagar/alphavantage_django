@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/src/
+    depends_on:
+      - db
+    networks:
+      main:
+        aliases:
+          - app
+  db:
+    image: postgres:10-alpine
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    volumes: 
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      main:
+        aliases:
+          - db
+  redis:
+    image: redis:alpine
+    ports:
+      - 6739:6739
+    networks:
+      main:
+        aliases:
+          - redis
+  celery_1:
+    restart: always
+    build:
+      context: .
+    command: celery -A alphavantage.celery worker -l info
+    volumes:
+      - ./:/src
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+      - app
+    networks:
+      main:
+        aliases:
+          - celery1
+  celery_2:
+    restart: always
+    build:
+      context: .
+    command: celery -A alphavantage beat -l INFO
+    volumes:
+      - ./:/src
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+      - app
+    networks:
+      main:
+        aliases:
+          - celery2
+volumes:
+  pgdata:
+networks:
+  main:

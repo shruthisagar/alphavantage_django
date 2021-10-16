@@ -16,6 +16,10 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import environ
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -38,7 +42,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "rest_framework",
     "django_celery_results",
     "django_celery_beat",
     "alpha",
@@ -81,17 +84,16 @@ WSGI_APPLICATION = "alphavantage.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "alphavantage",
-        "USER": "postgres",
-        "PASSWORD": "Admin@123",
-        "HOST": "localhost",
-        "PORT": "",
+        'HOST': env('DB_HOST'),
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASS'),
     }
 }
 CACHES = {
     "default": {
         "BACKEND": "redis_cache.RedisCache",
-        "LOCATION": "localhost:6379",
+        "LOCATION": "redis:6379",
         "OPTIONS": {
             "DB": 1,
         },
@@ -99,8 +101,8 @@ CACHES = {
 }
 
 # Celery settings
-CELERY_BROKER_URL = "redis://localhost:6379/0"
-CELERY_RESULT_BACKEND = "redis://localhost:6379/2"
+CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_RESULT_BACKEND = "redis://redis:6379/2"
 CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
@@ -153,4 +155,5 @@ STATIC_URL = "/static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-ALPHAVANTAGE_ACCESS_KEY = os.enviorn.get("ALPHAVANTAGE_KEY")
+ALPHAVANTAGE_ACCESS_KEY = env("ALPHAVANTAGE_KEY")
+# ALPHAVANTAGE_ACCESS_KEY ="96IF88GOW43ZTHRG"

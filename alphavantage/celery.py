@@ -12,7 +12,7 @@ app.conf.enable_utc = True
 app.conf.beat_schedule = {
     "fetch_and_save": {
         "task": "alpha.tasks.get_latest_and_update_alphavantage",
-        "schedule": crontab(hour="*", minute=32),
+        "schedule": crontab(hour="*", minute=38),
     }
 }
 

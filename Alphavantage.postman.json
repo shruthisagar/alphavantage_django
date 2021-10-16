@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "90536c1a-13a9-44f5-a55c-a217a58ff27d",
+		"name": "Alphavantage",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post Latest Quotes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/quotes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"quotes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Latest Quotes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/quotes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"quotes"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
