@@ -14,7 +14,7 @@ The application also has a background scheduler which runs every hour at 10th mi
                 create database alphavantage;
 
 - Install docker and docker compose
-- In the folder alphavantage, copy .env.example to .env and enter your alphavantage key and your postgres password
+- In the project root folder and  alphavantage folder, copy .env.example to .env and enter your alphavantage key and your postgres password
 - Run the docker using
 
                 docker-compose -f docker-compose.yml build
