@@ -1,9 +1,9 @@
+from datetime import datetime
 from django.db import models
 
-class AlphavantageData(models.Model):
-    open_value = models.FloatField()
-    low_value = models.FloatField()
-    close_value = models.FloatField()
-    high_value = models.FloatField()
-    created_time = models.DateTimeField()
-    volume_value = models.IntegerField()
+
+class AlphavantageBTCtoUSD(models.Model):
+    id = models.AutoField(primary_key=True)
+    exchange_rate = models.FloatField()
+    last_refresh_time = models.DateTimeField()
+    created_time = models.DateTimeField(default=datetime.utcnow)

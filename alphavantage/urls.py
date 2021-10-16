@@ -19,5 +19,7 @@ from django.urls import path, include
 import alpha
 
 urlpatterns = [
-    path('api/v1', include('alpha.urls'))
+    path("admin/", admin.site.urls),
+    # path('api-auth/', include('rest_framework.urls'))
+    path("api/v1/", include("alpha.urls")),
 ]
